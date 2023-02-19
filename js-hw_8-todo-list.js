@@ -3,6 +3,7 @@ const taskInput = document.querySelector("#taskInput");
 const taskDeleteAll = document.querySelector("#taskDeleteAll");
 const tasksList = document.querySelector("#tasksList");
 const emptyList = document.querySelector("#emptyList");
+const taskDeleteLast = document.querySelector("#taskDeleteLast");
 
 let tasks = [];
 
@@ -14,7 +15,8 @@ if (localStorage.getItem("tasks")) {
 form.addEventListener("submit", addTask);
 tasksList.addEventListener("click", deleteTask);
 tasksList.addEventListener("click", doneTask);
-taskDeleteAll.addEventListener("click", DeleteAllTasks);
+taskDeleteAll.addEventListener("click", deleteAllTasks);
+taskDeleteLast.addEventListener("click", deleteAllLast);
 
 function addTask(event) {
 	event.preventDefault();
@@ -43,11 +45,16 @@ function deleteTask(event) {
 	parenNode.remove();
 }
 
-function DeleteAllTasks() {
+function deleteAllTasks() {
 	while (tasksList.firstChild) {
 		tasks = tasks.filter((value) => +value.id !== +tasksList.firstChild.id);
 		tasksList.firstChild.remove();
 	}
+	saveToLocalStorage();
+}
+
+function deleteAllLast() {
+	tasksList.lastChild.remove();
 	saveToLocalStorage();
 }
 
@@ -93,6 +100,5 @@ function checkTask(task) {
 						<span class="badge bg-light text-dar middle ${cssClass}">${date}</span>						
 					</div>
 				</li>`;
-
 	tasksList.insertAdjacentHTML("beforeend", taskHTML);
 }
