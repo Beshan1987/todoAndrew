@@ -72,6 +72,8 @@ function addTask(event) {
 	checkTask(newTask);
 	taskInput.value = "";
 	taskInput.focus();
+	let i = localStorage.length;
+	saveToLocalStorageAmount();
 }
 
 function deleteTask(event) {
@@ -79,7 +81,7 @@ function deleteTask(event) {
 	const id = Number(parenNode.id);
 	tasks = tasks.filter((task) => task.id !== id);
 	saveToLocalStorage();
-
+	saveToLocalStorageAmount();
 	parenNode.remove();
 }
 
@@ -89,12 +91,14 @@ function deleteAllTasks() {
 		tasksList.firstChild.remove();
 	}
 	saveToLocalStorage();
+	saveToLocalStorageAmount();
 }
 
 function deleteLast() {
 	tasks.pop();
 	tasksList.lastElementChild.remove();
 	saveToLocalStorage();
+	saveToLocalStorageAmount();
 }
 
 function doneTask(event) {
@@ -115,6 +119,18 @@ function doneTask(event) {
 function saveToLocalStorage() {
 	localStorage.setItem("tasks", JSON.stringify(tasks));
 }
+
+function saveToLocalStorageAmount() {
+	localStorage.setItem("totalAmount", JSON.stringify(tasks.length));
+	amountOfTasks.textContent = `All: ${tasks.length}`;
+}
+
+const amountOfTasks = document.createElement("span");
+amountOfTasks.classList.add("border", "border-ligh", "badge");
+form.appendChild(amountOfTasks);
+amountOfTasks.textContent = `All: ${JSON.parse(
+	localStorage.getItem("totalAmount")
+)}`;
 
 function checkTask(task) {
 	const cssClass = task.isChecked
