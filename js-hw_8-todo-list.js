@@ -1,22 +1,61 @@
 const form = document.querySelector("#form");
 const taskInput = document.querySelector("#taskInput");
-const taskDeleteAll = document.querySelector("#taskDeleteAll");
 const tasksList = document.querySelector("#tasksList");
-const emptyList = document.querySelector("#emptyList");
-const taskDeleteLast = document.querySelector("#taskDeleteLast");
 
-let tasks = [];
-
-if (localStorage.getItem("tasks")) {
-	tasks = JSON.parse(localStorage.getItem("tasks"));
-	tasks.forEach((task) => checkTask(task));
+function safeParseJSON(json) {
+	try {
+		return JSON.parse(json);
+	} catch {
+		return null;
+	}
 }
 
+function getSavedTasks() {
+	const storedTasks = localStorage.getItem("tasks");
+
+	return safeParseJSON(storedTasks) || [];
+}
+
+let tasks = getSavedTasks();
+tasks.forEach((json) => checkTask(json));
+
 form.addEventListener("submit", addTask);
-tasksList.addEventListener("click", deleteTask);
-tasksList.addEventListener("click", doneTask);
-taskDeleteAll.addEventListener("click", deleteAllTasks);
-taskDeleteLast.addEventListener("click", deleteAllLast);
+form.addEventListener("click", onFormClick);
+tasksList.addEventListener("click", onListClick);
+
+function onFormClick(event) {
+	const {
+		target: {
+			dataset: { action },
+		},
+	} = event;
+
+	switch (action) {
+		case "deleteIAll":
+			deleteAllTasks(event);
+			break;
+		case "deleteLast":
+			deleteLast(event);
+			break;
+	}
+}
+
+function onListClick(event) {
+	const {
+		target: {
+			dataset: { action },
+		},
+	} = event;
+
+	switch (action) {
+		case "delete":
+			deleteTask(event);
+			break;
+		case "done":
+			doneTask(event);
+			break;
+	}
+}
 
 function addTask(event) {
 	event.preventDefault();
@@ -36,7 +75,6 @@ function addTask(event) {
 }
 
 function deleteTask(event) {
-	if (event.target.dataset.action !== "delete") return;
 	const parenNode = event.target.closest(".list-group-item");
 	const id = Number(parenNode.id);
 	tasks = tasks.filter((task) => task.id !== id);
@@ -53,13 +91,13 @@ function deleteAllTasks() {
 	saveToLocalStorage();
 }
 
-function deleteAllLast() {
-	tasksList.lastChild.remove();
+function deleteLast() {
+	tasks.pop();
+	tasksList.lastElementChild.remove();
 	saveToLocalStorage();
 }
 
 function doneTask(event) {
-	if (event.target.dataset.action !== "done") return;
 	const parentNode = event.target.closest(".list-group-item");
 	const id = Number(parentNode.id);
 	const task = tasks.find((task) => task.id === id);
