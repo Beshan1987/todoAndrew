@@ -105,10 +105,9 @@ function deleteAllTasks() {
 
 function showCompleted() {
 	const tasksAll = tasks.filter((value) => value.isChecked);
-	if (tasksAll.length > 0) {
-		while (tasksList.firstChild) {
-			tasksList.firstChild.remove();
-		}
+
+	while (tasksList.firstChild) {
+		tasksList.firstChild.remove();
 	}
 
 	for (let key of tasksAll) {
