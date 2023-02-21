@@ -11,6 +11,10 @@ body {
 	justify-content: space-between;
 }
 
+#counterTasks {
+	padding-top: 0.5vw;
+}
+
 .middle {
 	display: flex;
 	align-items: center;
@@ -33,11 +37,11 @@ body {
 .task-title--done {
 	text-decoration: line-through;
 	color: #cdcdcd;
-	background-color: #E6E6FA;
+	background-color: #e6e6fa;
 }
 
 .list-group-item--done {
-	background-color: #E6E6FA;
+	background-color: #e6e6fa;
 }
 
 .task-item__buttons {

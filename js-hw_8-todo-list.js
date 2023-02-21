@@ -1,6 +1,8 @@
 const form = document.querySelector("#form");
 const taskInput = document.querySelector("#taskInput");
 const tasksList = document.querySelector("#tasksList");
+const tasksAll = document.querySelector("#tasksAll");
+const tasksDone = document.querySelector("#tasksDone");
 
 function safeParseJSON(json) {
 	try {
@@ -114,6 +116,7 @@ function doneTask(event) {
 	parentNode.classList.toggle("list-group-item--done");
 	const taskDate = parentNode.querySelector(".text-dar");
 	taskDate.classList.toggle("task-title--done");
+	saveToLocalStorageAmountTasksDone();
 }
 
 function saveToLocalStorage() {
@@ -122,14 +125,25 @@ function saveToLocalStorage() {
 
 function saveToLocalStorageAmount() {
 	localStorage.setItem("totalAmount", JSON.stringify(tasks.length));
-	amountOfTasks.textContent = `All: ${tasks.length}`;
+	tasksAll.textContent = `All: ${tasks.length}`;
 }
 
-const amountOfTasks = document.createElement("span");
-amountOfTasks.classList.add("border", "border-light", "badge");
-form.appendChild(amountOfTasks);
-amountOfTasks.textContent = `All: ${JSON.parse(
+function saveToLocalStorageAmountTasksDone() {
+	localStorage.setItem(
+		"doneTasksAmount",
+		JSON.stringify(tasks.filter((task) => task.isChecked).length)
+	);
+	tasksDone.textContent = `All done: ${
+		tasks.filter((task) => task.isChecked).length
+	}`;
+}
+
+tasksAll.textContent = `All: ${JSON.parse(
 	localStorage.getItem("totalAmount")
+)}`;
+
+tasksDone.textContent = `All done: ${JSON.parse(
+	localStorage.getItem("doneTasksAmount")
 )}`;
 
 function checkTask(task) {
