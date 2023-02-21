@@ -151,7 +151,7 @@ function checkTask(task) {
 						<button type="button" data-action="delete" class="btn-action">
 							<img src="./img/cross.svg" alt="Done" width="18" height="18">
 						</button>
-						<span class="badge bg-light text-dar middle ${cssClass}">${date}</span>						
+						<span class="badge text-dar middle ${cssClass}">${date}</span>						
 					</div>
 				</li>`;
 	tasksList.insertAdjacentHTML("beforeend", taskHTML);
