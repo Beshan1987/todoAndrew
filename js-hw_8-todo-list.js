@@ -85,6 +85,7 @@ function deleteTask(event) {
 	saveToLocalStorage();
 	saveToLocalStorageAmount();
 	parenNode.remove();
+	saveToLocalStorageAmountTasksDone();
 }
 
 function deleteAllTasks() {
@@ -94,6 +95,7 @@ function deleteAllTasks() {
 	}
 	saveToLocalStorage();
 	saveToLocalStorageAmount();
+	saveToLocalStorageAmountTasksDone();
 }
 
 function deleteLast() {
@@ -101,6 +103,7 @@ function deleteLast() {
 	tasksList.lastElementChild.remove();
 	saveToLocalStorage();
 	saveToLocalStorageAmount();
+	saveToLocalStorageAmountTasksDone();
 }
 
 function doneTask(event) {
@@ -133,7 +136,7 @@ function saveToLocalStorageAmountTasksDone() {
 		"doneTasksAmount",
 		JSON.stringify(tasks.filter((task) => task.isChecked).length)
 	);
-	tasksDone.textContent = `All done: ${
+	tasksDone.textContent = `Completed: ${
 		tasks.filter((task) => task.isChecked).length
 	}`;
 }
@@ -142,7 +145,7 @@ tasksAll.textContent = `All: ${JSON.parse(
 	localStorage.getItem("totalAmount")
 )}`;
 
-tasksDone.textContent = `All done: ${JSON.parse(
+tasksDone.textContent = `Completed: ${JSON.parse(
 	localStorage.getItem("doneTasksAmount")
 )}`;
 
