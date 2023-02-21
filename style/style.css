@@ -32,11 +32,11 @@ body {
 .task-title--done {
 	text-decoration: line-through;
 	color: #cdcdcd;
-	background-color: #42be2a;
+	background-color: #E0FFFF;
 }
 
 .list-group-item--done {
-	background-color: #42be2a;
+	background-color: #E0FFFF;
 }
 
 .task-item__buttons {
