@@ -80,7 +80,7 @@ function addTask(event) {
 	checkTask(newTask);
 	taskInput.value = "";
 	taskInput.focus();
-	saveToLocalStorageAmount();
+	saveToLocalStorageAmountALL();
 }
 
 function deleteTask(event) {
@@ -88,7 +88,7 @@ function deleteTask(event) {
 	const id = Number(parenNode.id);
 	tasks = tasks.filter((task) => task.id !== id);
 	saveToLocalStorage();
-	saveToLocalStorageAmount();
+	saveToLocalStorageAmountALL();
 	parenNode.remove();
 	saveToLocalStorageAmountTasksDone();
 }
@@ -99,7 +99,7 @@ function deleteAllTasks() {
 		tasksList.firstChild.remove();
 	}
 	saveToLocalStorage();
-	saveToLocalStorageAmount();
+	saveToLocalStorageAmountALL();
 	saveToLocalStorageAmountTasksDone();
 }
 
@@ -110,8 +110,9 @@ function showCompleted() {
 			tasksList.firstChild.remove();
 		}
 	}
-	for (let i = 0; i < tasksAll.length; i += 1) {
-		checkTask(tasksAll[i]);
+
+	for (let key of tasksAll) {
+		checkTask(key);
 	}
 }
 
@@ -126,7 +127,7 @@ function deleteLast() {
 	tasks.pop();
 	tasksList.lastElementChild.remove();
 	saveToLocalStorage();
-	saveToLocalStorageAmount();
+	saveToLocalStorageAmountALL();
 	saveToLocalStorageAmountTasksDone();
 }
 
@@ -150,7 +151,7 @@ function saveToLocalStorage() {
 	localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-function saveToLocalStorageAmount() {
+function saveToLocalStorageAmountALL() {
 	localStorage.setItem("totalAmount", JSON.stringify(tasks.length));
 	tasksAll.textContent = `All: ${tasks.length}`;
 }
