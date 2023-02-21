@@ -21,6 +21,10 @@ body {
 	background-color: #f8f9fa;
 }
 
+.form-add * {
+	margin-bottom: 1vw;
+}
+
 .center {
 	display: flex;
 	justify-content: center;
