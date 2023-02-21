@@ -126,7 +126,7 @@ function saveToLocalStorageAmount() {
 }
 
 const amountOfTasks = document.createElement("span");
-amountOfTasks.classList.add("border", "border-ligh", "badge");
+amountOfTasks.classList.add("border", "border-light", "badge");
 form.appendChild(amountOfTasks);
 amountOfTasks.textContent = `All: ${JSON.parse(
 	localStorage.getItem("totalAmount")
