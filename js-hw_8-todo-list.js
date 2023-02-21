@@ -39,6 +39,12 @@ function onFormClick(event) {
 		case "deleteLast":
 			deleteLast(event);
 			break;
+		case "showCompleted":
+			showCompleted(event);
+			break;
+		case "showAll":
+			showAll(event);
+			break;
 	}
 }
 
@@ -74,7 +80,6 @@ function addTask(event) {
 	checkTask(newTask);
 	taskInput.value = "";
 	taskInput.focus();
-	let i = localStorage.length;
 	saveToLocalStorageAmount();
 }
 
@@ -96,6 +101,25 @@ function deleteAllTasks() {
 	saveToLocalStorage();
 	saveToLocalStorageAmount();
 	saveToLocalStorageAmountTasksDone();
+}
+
+function showCompleted() {
+	const tasksAll = tasks.filter((value) => value.isChecked);
+	if (tasksAll.length > 0) {
+		while (tasksList.firstChild) {
+			tasksList.firstChild.remove();
+		}
+	}
+	for (let i = 0; i < tasksAll.length; i += 1) {
+		checkTask(tasksAll[i]);
+	}
+}
+
+function showAll() {
+	while (tasksList.firstChild) {
+		tasksList.firstChild.remove();
+	}
+	tasks.forEach((json) => checkTask(json));
 }
 
 function deleteLast() {
