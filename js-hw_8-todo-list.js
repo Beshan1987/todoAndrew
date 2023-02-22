@@ -3,6 +3,8 @@ const taskInput = document.querySelector("#taskInput");
 const tasksList = document.querySelector("#tasksList");
 const tasksAll = document.querySelector("#tasksAll");
 const tasksDone = document.querySelector("#tasksDone");
+const btnDone = document.querySelector(".btn-outline-success");
+const btnShowAll = document.querySelector(".btn-outline-info");
 
 function safeParseJSON(json) {
 	try {
@@ -14,7 +16,6 @@ function safeParseJSON(json) {
 
 function getSavedTasks() {
 	const storedTasks = localStorage.getItem("tasks");
-
 	return safeParseJSON(storedTasks) || [];
 }
 
@@ -65,6 +66,45 @@ function onListClick(event) {
 	}
 }
 
+function reactBtn() {
+	let arrayBtn = form.children;
+	for (let i = 0; i < arrayBtn.length; i += 1) {
+		if (arrayBtn[i].hasAttribute("data-action") && tasks.length > 0) {
+			arrayBtn[i].removeAttribute("disabled");
+		}
+		if (arrayBtn[i].hasAttribute("data-action") && tasks.length === 0) {
+			arrayBtn[i].setAttribute("disabled", "disabled");
+		}
+		if (
+			arrayBtn[i].classList.contains("btn-outline-success") &&
+			tasks.filter((value) => value.isChecked).length > 0
+		) {
+			arrayBtn[i].removeAttribute("disabled");
+		}
+		if (
+			arrayBtn[i].classList.contains("btn-outline-success") &&
+			tasks.filter((value) => value.isChecked).length === 0
+		) {
+			arrayBtn[i].setAttribute("disabled", "disabled");
+		}
+	}
+}
+
+function reactBtnDone() {
+	for (key of tasks) {
+		if (key.isChecked) {
+			btnDone.removeAttribute("disabled");
+		}
+	}
+}
+
+function reactBtnAll() {
+	if (btnDone.hasAttribute("disabled")) {
+		btnShowAll.setAttribute("disabled", "disabled");
+	} else btnShowAll.removeAttribute("disabled");
+	console.log(btnShowAll);
+}
+
 function addTask(event) {
 	event.preventDefault();
 	const taskText = taskInput.value;
@@ -78,6 +118,7 @@ function addTask(event) {
 	tasks.push(newTask);
 	saveToLocalStorage();
 	checkTask(newTask);
+	reactBtn();
 	taskInput.value = "";
 	taskInput.focus();
 	saveToLocalStorageAmountALL();
@@ -91,6 +132,7 @@ function deleteTask(event) {
 	saveToLocalStorageAmountALL();
 	parenNode.remove();
 	saveToLocalStorageAmountTasksDone();
+	reactBtn();
 }
 
 function deleteAllTasks() {
@@ -101,6 +143,7 @@ function deleteAllTasks() {
 	saveToLocalStorage();
 	saveToLocalStorageAmountALL();
 	saveToLocalStorageAmountTasksDone();
+	reactBtn();
 }
 
 function showCompleted() {
@@ -124,10 +167,13 @@ function showAll() {
 
 function deleteLast() {
 	tasks.pop();
-	tasksList.lastElementChild.remove();
+	if (tasksList.children.length > 0) {
+		tasksList.lastElementChild.remove();
+	}
 	saveToLocalStorage();
 	saveToLocalStorageAmountALL();
 	saveToLocalStorageAmountTasksDone();
+	reactBtn();
 }
 
 function doneTask(event) {
@@ -144,6 +190,8 @@ function doneTask(event) {
 	const taskDate = parentNode.querySelector(".text-dar");
 	taskDate.classList.toggle("task-title--done");
 	saveToLocalStorageAmountTasksDone();
+	reactBtn();
+	reactBtnDone();
 }
 
 function saveToLocalStorage() {
@@ -181,6 +229,8 @@ function checkTask(task) {
 		? "list-group-item list-group-item--done"
 		: "list-group-item";
 	const date = task.date;
+
+	reactBtn();
 
 	const taskHTML = `
                 <li id="${task.id}" class="d-flex justify-content-between task-item ${cssClassBG}">
