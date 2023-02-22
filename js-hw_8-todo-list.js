@@ -93,14 +93,6 @@ function reactBtn() {
 	} else btnShowAll.setAttribute("disabled", "disabled");
 }
 
-function reactBtnDone() {
-	for (key of tasks) {
-		if (key.isChecked) {
-			btnDone.removeAttribute("disabled");
-		}
-	}
-}
-
 function addTask(event) {
 	event.preventDefault();
 	const taskText = taskInput.value;
@@ -189,7 +181,6 @@ function doneTask(event) {
 	taskDate.classList.toggle("task-title--done");
 	saveToLocalStorageAmountTasksDone();
 	reactBtn();
-	reactBtnDone();
 }
 
 function saveToLocalStorage() {
