@@ -88,6 +88,9 @@ function reactBtn() {
 			arrayBtn[i].setAttribute("disabled", "disabled");
 		}
 	}
+	if (tasksList.children.length < tasks.length) {
+		btnShowAll.removeAttribute("disabled");
+	} else btnShowAll.setAttribute("disabled", "disabled");
 }
 
 function reactBtnDone() {
@@ -96,13 +99,6 @@ function reactBtnDone() {
 			btnDone.removeAttribute("disabled");
 		}
 	}
-}
-
-function reactBtnAll() {
-	if (btnDone.hasAttribute("disabled")) {
-		btnShowAll.setAttribute("disabled", "disabled");
-	} else btnShowAll.removeAttribute("disabled");
-	console.log(btnShowAll);
 }
 
 function addTask(event) {
@@ -156,6 +152,7 @@ function showCompleted() {
 	for (let key of tasksAll) {
 		checkTask(key);
 	}
+	reactBtn();
 }
 
 function showAll() {
@@ -163,6 +160,7 @@ function showAll() {
 		tasksList.firstChild.remove();
 	}
 	tasks.forEach((json) => checkTask(json));
+	reactBtn();
 }
 
 function deleteLast() {
