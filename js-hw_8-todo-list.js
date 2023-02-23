@@ -219,9 +219,7 @@ function checkTask(task) {
 		: "list-group-item";
 	const date = task.date;
 
-	reactBtn();
-
-	const taskHTML = `
+		const taskHTML = `
                 <li id="${task.id}" class="d-flex justify-content-between task-item ${cssClassBG}">
 					<span class="${cssClass}">${task.text}</span>
 					<div class="task-item__buttons">
@@ -235,4 +233,5 @@ function checkTask(task) {
 					</div>
 				</li>`;
 	tasksList.insertAdjacentHTML("beforeend", taskHTML);
+	reactBtn();
 }
