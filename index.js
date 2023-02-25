@@ -91,7 +91,7 @@ function reactBtn() {
 function searchTask(event) {
 	event.preventDefault();
 	let AllTaskfound = tasks.filter((tasks) =>
-		searchID(constant.taskSearch.value, tasks.text)
+		searchID(constant.taskSearch.value.toLowerCase(), tasks.text.toLowerCase())
 	);
 	if (AllTaskfound.length > 0) {
 		while (constant.tasksList.firstChild) {
@@ -131,7 +131,6 @@ function addTask(event) {
 	constant.taskInput.value = "";
 	constant.taskInput.focus();
 	saveToLocalStorageAmountALL();
-	console.log(tasks[0].text);
 }
 
 function deleteTask(event) {
