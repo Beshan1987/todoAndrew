@@ -22,11 +22,15 @@
 					<button type="button" data-action="deleteLast" id="taskDeleteLast" class="btn btn-outline-warning btn-lg" disabled>Delete Last</button>
 					<button type="button" data-action="showCompleted" id="taskShowCompleted" class="btn btn-outline-success btn-lg" disabled>Show Completed</button>
 					<button type="button" data-action="showAll" id="taskShowAll" class="btn btn-outline-info btn-lg" disabled>Show All</button>
+					
 					<div id="counterTasks">
 						<span id="tasksAll" class="border border-ligh badge"></span>
 						<span id="tasksDone" class="border border-ligh badge"></span>						
 					</div>
 				</form>
+				<form id="formSearch" class="form-add">
+				<input type="text" class="form-control" id="taskSearch" placeholder="Search ..." required>
+			</form>
 			</div>
 		</div>
 		<div class="card mb-4">
@@ -34,6 +38,6 @@
 			</ul>
 		</div>
 	</div>	
-	<script src="./js-hw_8-todo-list.js"></script>
+	<script src="./index.js" type="module"></script>
 </body>
 </html>
