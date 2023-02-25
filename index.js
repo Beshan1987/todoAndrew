@@ -91,7 +91,10 @@ function reactBtn() {
 function searchTask(event) {
 	event.preventDefault();
 	let AllTaskfound = tasks.filter((tasks) =>
-		searchID(constant.taskSearch.value.toLowerCase(), tasks.text.toLowerCase())
+		searchID(
+			constant.taskSearch.value.toLowerCase().trim(),
+			tasks.text.toLowerCase()
+		)
 	);
 	if (AllTaskfound.length > 0) {
 		while (constant.tasksList.firstChild) {
@@ -101,7 +104,15 @@ function searchTask(event) {
 		for (let key of AllTaskfound) {
 			checkTask(key);
 		}
+		reactBtn();
 	}
+	if (AllTaskfound.length === 0) {
+		while (constant.tasksList.firstChild) {
+			constant.tasksList.firstChild.remove();
+		}
+		reactBtn();
+	}
+
 	constant.taskSearch.focus();
 	constant.taskSearch.value = "";
 }
@@ -116,6 +127,9 @@ function searchID(req, taskTXT) {
 
 function addTask(event) {
 	event.preventDefault();
+	if (constant.taskInput.value.trim() == "") {
+		return;
+	}
 	const taskText = constant.taskInput.value;
 	const newTask = {
 		id: Date.now(),
