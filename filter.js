@@ -15,7 +15,10 @@ export function reactBtn() {
 		constant.btnDone.removeAttribute("disabled");
 	} else constant.btnDone.setAttribute("disabled", "disabled");
 
-	if (tasks.filter((value) => value.isChecked).length > 0) {
+	if (
+		tasks.filter((value) => value.isChecked).length > 0 ||
+		constant.tasksList.children.length < tasks.length
+	) {
 		constant.btnShowCurrent.removeAttribute("disabled");
 	} else constant.btnShowCurrent.setAttribute("disabled", "disabled");
 
@@ -71,6 +74,7 @@ export function showCompleted() {
 	for (let key of tasksAll) {
 		view.checkTask(key);
 	}
+
 	reactBtn();
 }
 
