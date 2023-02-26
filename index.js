@@ -117,8 +117,8 @@ function searchTask(event) {
 	constant.taskSearch.value = "";
 }
 
-function searchID(req, taskTXT) {
-	if (taskTXT.search(req) != -1) {
+function searchID(searchValue, taskValue) {
+	if (taskValue.search(searchValue) != -1) {
 		return true;
 	} else {
 		return false;
@@ -248,8 +248,6 @@ constant.tasksDone.textContent = `Completed: ${JSON.parse(
 )}`;
 
 function checkTask(task) {
-	reactBtn();
-
 	const taskHTML = `
                 <li id="${
 									task.id
@@ -272,4 +270,5 @@ function checkTask(task) {
 					</div>
 				</li>`;
 	constant.tasksList.insertAdjacentHTML("beforeend", taskHTML);
+	reactBtn();
 }
