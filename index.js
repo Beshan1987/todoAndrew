@@ -62,27 +62,18 @@ function onListClick(event) {
 }
 
 function reactBtn() {
-	let allBtn = constant.form.children;
-	for (let i = 0; i < allBtn.length; i += 1) {
-		if (allBtn[i].hasAttribute("data-action") && tasks.length > 0) {
-			allBtn[i].removeAttribute("disabled");
-		}
-		if (allBtn[i].hasAttribute("data-action") && tasks.length === 0) {
-			allBtn[i].setAttribute("disabled", "disabled");
-		}
-		if (
-			allBtn[i].classList.contains("btn-outline-success") &&
-			tasks.filter((value) => value.isChecked).length > 0
-		) {
-			allBtn[i].removeAttribute("disabled");
-		}
-		if (
-			allBtn[i].classList.contains("btn-outline-success") &&
-			tasks.filter((value) => value.isChecked).length === 0
-		) {
-			allBtn[i].setAttribute("disabled", "disabled");
-		}
+	if (tasks.length > 0) {
+		constant.btnDeleteAll.removeAttribute("disabled");
+		constant.btnDeleteLast.removeAttribute("disabled");
 	}
+	if (tasks.length === 0) {
+		constant.btnDeleteAll.setAttribute("disabled", "disabled");
+		constant.btnDeleteLast.setAttribute("disabled", "disabled");
+	}
+	if (tasks.filter((value) => value.isChecked).length > 0) {
+		constant.btnDone.removeAttribute("disabled");
+	} else constant.btnDone.setAttribute("disabled", "disabled");
+
 	if (constant.tasksList.children.length < tasks.length) {
 		constant.btnShowAll.removeAttribute("disabled");
 	} else constant.btnShowAll.setAttribute("disabled", "disabled");
