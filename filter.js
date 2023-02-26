@@ -6,11 +6,11 @@ export function reactBtn() {
 	if (tasks.length > 0) {
 		constant.btnDeleteAll.removeAttribute("disabled");
 		constant.btnDeleteLast.removeAttribute("disabled");
+		constant.radioShowAll.removeAttribute("disabled");
 	}
 	if (tasks.length === 0) {
 		constant.btnDeleteAll.setAttribute("disabled", "disabled");
 		constant.btnDeleteLast.setAttribute("disabled", "disabled");
-		constant.radioShowAll.removeAttribute("disabled");
 	}
 
 	if (tasks.filter((value) => value.isChecked).length > 0) {
@@ -20,10 +20,6 @@ export function reactBtn() {
 		constant.radioDone.setAttribute("disabled", "disabled");
 		constant.radioShowCurrent.setAttribute("disabled", "disabled");
 	}
-
-	// if (constant.tasksList.children.length <= tasks.length) {
-	// 	constant.radioShowAll.removeAttribute("disabled");
-	// } else constant.radioShowAll.setAttribute("disabled", "disabled");
 }
 export function searchTask(event) {
 	event.preventDefault();
