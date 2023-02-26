@@ -19,9 +19,14 @@ export function deleteTask(event) {
 }
 
 export function deleteAllTasks() {
+	let i = tasks.length;
+	while (i) {
+		i -= 1;
+		tasks.pop();
+	}
+
 	while (constant.tasksList.firstChild) {
 		constant.tasksList.firstChild.remove();
-		tasks.pop();
 	}
 
 	model.saveToLocalStorage();
