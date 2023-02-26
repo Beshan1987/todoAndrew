@@ -5,6 +5,7 @@ export const tasksAll = document.querySelector("#tasksAll");
 export const tasksDone = document.querySelector("#tasksDone");
 export const btnDone = document.querySelector("#taskShowCompleted");
 export const btnShowAll = document.querySelector("#taskShowAll");
+export const btnShowCurrent = document.querySelector("#taskShowCurrent");
 export const btnDeleteAll = document.querySelector("#taskDeleteAll");
 export const btnDeleteLast = document.querySelector("#taskDeleteLast");
 export const formSearch = document.querySelector("#formSearch");

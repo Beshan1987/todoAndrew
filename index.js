@@ -30,6 +30,9 @@ function onFormClick(event) {
 		case "showAll":
 			filter.showAll(event);
 			break;
+		case "showCurrent":
+			filter.showCurrent(event);
+			break;
 	}
 }
 

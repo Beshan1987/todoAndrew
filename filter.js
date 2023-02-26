@@ -15,6 +15,10 @@ export function reactBtn() {
 		constant.btnDone.removeAttribute("disabled");
 	} else constant.btnDone.setAttribute("disabled", "disabled");
 
+	if (tasks.filter((value) => value.isChecked).length > 0) {
+		constant.btnShowCurrent.removeAttribute("disabled");
+	} else constant.btnShowCurrent.setAttribute("disabled", "disabled");
+
 	if (constant.tasksList.children.length < tasks.length) {
 		constant.btnShowAll.removeAttribute("disabled");
 	} else constant.btnShowAll.setAttribute("disabled", "disabled");
@@ -59,6 +63,19 @@ function searchID(searchValue, taskValue) {
 
 export function showCompleted() {
 	const tasksAll = tasks.filter((value) => value.isChecked);
+
+	while (constant.tasksList.firstChild) {
+		constant.tasksList.firstChild.remove();
+	}
+
+	for (let key of tasksAll) {
+		view.checkTask(key);
+	}
+	reactBtn();
+}
+
+export function showCurrent() {
+	const tasksAll = tasks.filter((value) => !value.isChecked);
 
 	while (constant.tasksList.firstChild) {
 		constant.tasksList.firstChild.remove();
