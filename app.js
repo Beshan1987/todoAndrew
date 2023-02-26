@@ -14,6 +14,7 @@ export function deleteTask(event) {
 	model.saveToLocalStorageAmountALL();
 	parenNode.remove();
 	model.saveToLocalStorageAmountTasksDone();
+	model.saveToLocalStorageAmountTasksCurrent();
 	filter.reactBtn();
 }
 
@@ -26,6 +27,7 @@ export function deleteAllTasks() {
 	model.saveToLocalStorage();
 	model.saveToLocalStorageAmountALL();
 	model.saveToLocalStorageAmountTasksDone();
+	model.saveToLocalStorageAmountTasksCurrent();
 	filter.reactBtn();
 }
 
@@ -37,6 +39,7 @@ export function deleteLast() {
 	model.saveToLocalStorage();
 	model.saveToLocalStorageAmountALL();
 	model.saveToLocalStorageAmountTasksDone();
+	model.saveToLocalStorageAmountTasksCurrent();
 	filter.reactBtn();
 }
 
@@ -54,5 +57,6 @@ export function doneTask(event) {
 	const taskDate = parentNode.querySelector(".text-dar");
 	taskDate.classList.toggle("task-title--done");
 	model.saveToLocalStorageAmountTasksDone();
+	model.saveToLocalStorageAmountTasksCurrent();
 	filter.reactBtn();
 }

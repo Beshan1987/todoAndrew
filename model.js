@@ -36,10 +36,24 @@ export function saveToLocalStorageAmountTasksDone() {
 	}`;
 }
 
+export function saveToLocalStorageAmountTasksCurrent() {
+	localStorage.setItem(
+		"currentTasksAmount",
+		JSON.stringify(tasks.filter((task) => !task.isChecked).length)
+	);
+	constant.tasksCurrent.textContent = `In-process: ${
+		tasks.filter((task) => !task.isChecked).length
+	}`;
+}
+
 constant.tasksAll.textContent = `All: ${JSON.parse(
 	localStorage.getItem("totalAmount")
 )}`;
 
 constant.tasksDone.textContent = `Completed: ${JSON.parse(
 	localStorage.getItem("doneTasksAmount")
+)}`;
+
+constant.tasksCurrent.textContent = `In-process: ${JSON.parse(
+	localStorage.getItem("currentTasksAmount")
 )}`;
