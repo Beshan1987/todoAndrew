@@ -19,12 +19,19 @@
 					</div>
 					<button type="submit" class="btn btn-primary btn-lg">Add</button>
 					<button type="button" data-action="deleteIAll" id="taskDeleteAll" class="btn btn-outline-danger btn-lg" disabled>Delete All</button>
-					<button type="button" data-action="deleteLast" id="taskDeleteLast" class="btn btn-outline-warning btn-lg" disabled>Delete Last</button>
-					<button type="button" data-action="showCompleted" id="taskShowCompleted" class="btn btn-outline-success btn-lg" disabled>Show Completed</button>
-					<button type="button" data-action="showCurrent" id="taskShowCurrent" class="btn btn-outline-dark btn-lg" disabled>Show in-process</button>
-					<button type="button" data-action="showAll" id="taskShowAll" class="btn btn-outline-info btn-lg" disabled>Show All</button>
-					
-					
+					<button type="button" data-action="deleteLast" id="taskDeleteLast" class="btn btn-outline-warning btn-lg" disabled>Delete Last</button>					
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="inlineRadioOptions" data-action="showCompleted" id="taskShowCompleted" value="option1" disabled>
+						<label class="form-check-label" for="taskShowCompleted">Show Completed</label>
+					  </div>
+					  <div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="inlineRadioOptions" data-action="showCurrent" id="taskShowCurrent" value="option2" disabled>
+						<label class="form-check-label" for="taskShowCurrent">Show in-process</label>
+					  </div>
+					  <div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="inlineRadioOptions" data-action="showAll" id="taskShowAll" value="option3" disabled checked>
+						<label class="form-check-label" for="taskShowAll">Show All</label>
+					  </div>
 					<div id="counterTasks">
 						<span id="tasksAll" class="border border-ligh badge"></span>
 						<span id="tasksDone" class="border border-ligh badge"></span>						

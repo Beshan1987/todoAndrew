@@ -11,6 +11,7 @@ export function reactBtn() {
 		constant.btnDeleteAll.setAttribute("disabled", "disabled");
 		constant.btnDeleteLast.setAttribute("disabled", "disabled");
 	}
+
 	if (tasks.filter((value) => value.isChecked).length > 0) {
 		constant.btnDone.removeAttribute("disabled");
 	} else constant.btnDone.setAttribute("disabled", "disabled");
@@ -26,7 +27,6 @@ export function reactBtn() {
 		constant.btnShowAll.removeAttribute("disabled");
 	} else constant.btnShowAll.setAttribute("disabled", "disabled");
 }
-
 export function searchTask(event) {
 	event.preventDefault();
 	let AllTaskfound = tasks.filter((tasks) =>
@@ -95,6 +95,6 @@ export function showAll() {
 	while (constant.tasksList.firstChild) {
 		constant.tasksList.firstChild.remove();
 	}
-	tasks.forEach((json) => view.checkTask(json));
+	tasks.forEach((task) => view.checkTask(task));
 	reactBtn();
 }
