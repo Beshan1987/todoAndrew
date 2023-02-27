@@ -17,6 +17,24 @@ function getSavedTasks() {
 export let tasks = getSavedTasks();
 tasks.forEach((json) => view.checkTask(json));
 
+function getSavedTasksTotal() {
+	const storedTasksTotal = localStorage.getItem("totalAmount");
+	return storedTasksTotal ? storedTasksTotal : 0;
+}
+constant.tasksAll.textContent = `All: ${getSavedTasksTotal()}`;
+
+function getSavedTasksDone() {
+	const storedTasksDone = localStorage.getItem("doneTasksAmount");
+	return storedTasksDone ? storedTasksDone : 0;
+}
+constant.tasksDone.textContent = `Completed: ${getSavedTasksDone()}`;
+
+function getSavedTasksCurrent() {
+	const storedTasksCurrent = localStorage.getItem("currentTasksAmount");
+	return storedTasksCurrent ? storedTasksCurrent : 0;
+}
+constant.tasksCurrent.textContent = `In-process: ${getSavedTasksCurrent()}`;
+
 export function saveToLocalStorage() {
 	localStorage.setItem("tasks", JSON.stringify(tasks));
 }
@@ -45,15 +63,3 @@ export function saveToLocalStorageAmountTasksCurrent() {
 		tasks.filter((task) => !task.isChecked).length
 	}`;
 }
-
-constant.tasksAll.textContent = `All: ${JSON.parse(
-	localStorage.getItem("totalAmount")
-)}`;
-
-constant.tasksDone.textContent = `Completed: ${JSON.parse(
-	localStorage.getItem("doneTasksAmount")
-)}`;
-
-constant.tasksCurrent.textContent = `In-process: ${JSON.parse(
-	localStorage.getItem("currentTasksAmount")
-)}`;

@@ -73,4 +73,6 @@ function addTask(event) {
 	constant.taskInput.value = "";
 	constant.taskInput.focus();
 	model.saveToLocalStorageAmountALL();
+	model.saveToLocalStorageAmountTasksDone();
+	model.saveToLocalStorageAmountTasksCurrent();
 }
