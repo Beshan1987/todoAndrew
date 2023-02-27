@@ -7,6 +7,7 @@ export const tasksCurrent = document.querySelector("#tasksCurrent");
 export const radioDone = document.querySelector("#taskShowCompleted");
 export const radioShowAll = document.querySelector("#taskShowAll");
 export const radioShowCurrent = document.querySelector("#taskShowCurrent");
+export const radioShowFound = document.querySelector("#taskShowFound");
 export const btnDeleteAll = document.querySelector("#taskDeleteAll");
 export const btnDeleteLast = document.querySelector("#taskDeleteLast");
 export const formSearch = document.querySelector("#formSearch");

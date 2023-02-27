@@ -7,6 +7,8 @@ export function reactBtn() {
 		constant.btnDeleteAll.removeAttribute("disabled");
 		constant.btnDeleteLast.removeAttribute("disabled");
 		constant.radioShowAll.removeAttribute("disabled");
+		constant.radioShowAll.setAttribute("checked", "checked");
+		constant.radioShowFound.removeAttribute("checked");
 	}
 	if (tasks.length === 0) {
 		constant.btnDeleteAll.setAttribute("disabled", "disabled");
@@ -20,7 +22,10 @@ export function reactBtn() {
 		constant.radioDone.setAttribute("disabled", "disabled");
 		constant.radioShowCurrent.setAttribute("disabled", "disabled");
 	}
+	constant.radioShowFound.setAttribute("disabled", "disabled");
+	constant.radioShowFound.removeAttribute("checked");
 }
+
 export function searchTask(event) {
 	event.preventDefault();
 	let AllTaskfound = tasks.filter((tasks) =>
@@ -43,9 +48,9 @@ export function searchTask(event) {
 		while (constant.tasksList.firstChild) {
 			constant.tasksList.firstChild.remove();
 		}
-		reactBtn();
 	}
 
+	constant.radioShowFound.removeAttribute("disabled");
 	constant.taskSearch.focus();
 	constant.taskSearch.value = "";
 }
